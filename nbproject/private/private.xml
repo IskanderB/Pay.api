@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/app/Http/Controllers/PaymentController.php</file>
+            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/app/Payment.php</file>
+            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/resources/js/components/CardFormComponent.vue</file>
+            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/database/migrations/2020_09_07_203334_create_payments_table.php</file>
+            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/resources/sass/app.scss</file>
+            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/app/Session.php</file>
+        </group>
+    </open-files>
+</project-private>
