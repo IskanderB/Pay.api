@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/v1/register', 'PaymentController@register')->name('register');
 Route::post('/v1/payments/operation', 'PaymentController@create')->name('operation');
+Route::get('/v1/payments', 'PaymentController@getAll')->name('payments');

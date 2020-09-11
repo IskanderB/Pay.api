@@ -5,10 +5,7 @@
         <group>
             <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/app/Http/Controllers/PaymentController.php</file>
             <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/app/Payment.php</file>
-            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/resources/js/components/CardFormComponent.vue</file>
-            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/database/migrations/2020_09_07_203334_create_payments_table.php</file>
-            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/resources/sass/app.scss</file>
-            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/app/Session.php</file>
+            <file>file:/D:/PHP/Vagrant/Projects/pay.api.ru/routes/api.php</file>
         </group>
     </open-files>
 </project-private>

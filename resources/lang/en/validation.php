@@ -147,5 +147,10 @@ return [
     */
 
     'attributes' => [],
-
+    
+    'custom' => [
+    'sessionID' => [
+        'exists' => route('cardResponse', ['status' => 'timeOut']),
+    ],
+],
 ];

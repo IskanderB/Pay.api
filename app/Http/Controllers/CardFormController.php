@@ -21,11 +21,17 @@ class CardFormController extends Controller
         ];
         $validator = $this->validator($request->all(), $rules);
         if ($validator) {
-            return $validator;
+            return redirect()->route('cardResponse', ['status' => 'timeOut']);
         }
         
         $result = $this->session->getOne($request->sessionID);
+        if (!$result) {
+            return redirect()->route('cardResponse', ['status' => 'timeOut']);
+        }
         
-        return view('cardForm', ['data' => $result]);
+        $result['sessionID'] = $request->sessionID;
+        return view('cardForm', [
+            'data' => $result,
+        ]);
     }
 }

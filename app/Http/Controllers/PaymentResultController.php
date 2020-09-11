@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 class PaymentResultController extends Controller
 {
     private $messages = [
-        'Payment is not successfull!',
-        'Payment is successfull!',
+        0 => 'Payment is not successfull!',
+        1 => 'Payment is successfull!',
+        'timeOut' => 'Payment session is time out, used or incorrect!',
     ];
     public function index(Request $request) {
         return view('paymentResult', ['data' => [

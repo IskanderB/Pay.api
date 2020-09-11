@@ -11,6 +11,8 @@ class PaymentController extends Controller
 {
     use \App\Traits\PeculiarValidator;
     
+    const DEFAULT_COUNT_ROWS = 10;
+    
     private $payment;
     private $session;
         
@@ -24,7 +26,7 @@ class PaymentController extends Controller
     public function register(Request $request) : \Illuminate\Http\JsonResponse {
         $this->session = new Session();
         $rules = [
-            'amount' => 'required|integer',
+            'amount' => 'required|numeric',
             'target' => 'required|string|max:255'
         ];
         $validator = $this->validator($request->all(), $rules);
@@ -51,6 +53,7 @@ class PaymentController extends Controller
     public function create(Request $request) {
         $this->payment = new Payment();
         $rules = [
+            'sessionID' => 'required|string|max:80|min:80|exists:sessions,sessionID',
             'cardNumber' => ['required', 'string', 'max:19', 'min:19', new Luhn],
             'cardName' => 'max:255',
             'cardDate' => 'required|integer',
@@ -73,5 +76,44 @@ class PaymentController extends Controller
         return response()->json([
                 'url' => $url,
             ], 400);
+    }
+    
+    public function getAll(Request $request) {
+        $this->payment = new Payment();
+        $rules = [
+            'begin_interval' => 'required|string|max:19',
+            'end_interval' => 'string|max:19',
+            'skip' => 'integer',
+        ];
+        $validator = $this->validator($request->all(), $rules);
+        if ($validator) {
+            return $validator;
+        }
+
+        $data = [
+            'begin_interval' => $request->begin_interval,
+            'end_interval' => $request->end_interval ?? date('Y-m-d h:i:s'),
+            'skip' => $request->skip ?? 0,
+        ];
+
+        $result = $this->payment->getAll($data);
+        
+        if ($result) {
+            if(count($result) > 10) {
+                $skip = $data['skip'] + self::DEFAULT_COUNT_ROWS;
+                $route = route('payments', [
+                    'begin_interval' => $request->begin_interval,
+                    'end_interval' => $request->end_interval,
+                    'skip' => $skip,
+                ]);
+            }
+            return response()->json([
+                'data' => $result,
+                'next' => $route ?? '',
+            ], 200);
+        }
+        return response()->json([
+                'data' => '',
+            ], 404);
     }
 }

@@ -11675,3 +11675,36 @@ body {
   margin-left: 20px;
 }
 
+.result_wrap {
+  justify-content: center;
+}
+
+.result_wrap .result_box {
+  margin: auto;
+  float: none;
+  min-height: 100px;
+  background-color: white;
+  width: 600px;
+  margin-top: 150px;
+  border-radius: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .result_wrap .result_box {
+    width: 90%;
+  }
+}
+
+.result_wrap .result_box .result {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: 35px;
+}
+
+@media screen and (max-width: 464px) {
+  .result_wrap .result_box .result {
+    margin-top: 25px;
+  }
+}
+

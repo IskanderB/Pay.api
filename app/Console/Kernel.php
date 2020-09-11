@@ -24,7 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $timeK = (string)60*60;
+            $sql = 'DELETE FROM sessions WHERE (UNIX_TIMESTAMP(created_at) + ' . $timeK . ') < UNIX_TIMESTAMP(CURRENT_TIMESTAMP)';
+            \DB::delete($sql);
+          })->everyMinute();
     }
 
     /**

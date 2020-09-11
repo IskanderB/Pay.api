@@ -54,4 +54,8 @@ class Session extends Model
         }
         return $result;
     }
+    
+    public function deleteOne($sessionID) {
+        $this->where('sessionID', '=', $sessionID)->delete();
+    }
 }

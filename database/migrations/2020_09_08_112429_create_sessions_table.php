@@ -16,7 +16,7 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('sessionID', 80)->unique();
             $table->timestamp('created_at')->useCurrent();
-            $table->integer('amount')->nullable();
+            $table->float('amount')->nullable();
             $table->string('target', 255)->nullable();
         });
     }

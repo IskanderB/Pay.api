@@ -2177,6 +2177,7 @@ __webpack_require__.r(__webpack_exports__);
         method: 'post',
         url: 'http://pay.api.ru/api/v1/payments/operation',
         params: {
+          sessionID: this.data.sessionID,
           amount: this.data.amount,
           target: this.data.target,
           cardNumber: this.cardNumber,
@@ -2191,6 +2192,10 @@ __webpack_require__.r(__webpack_exports__);
 
         if (error.response.data.url) {
           window.location.replace(error.response.data.url);
+        }
+
+        if (error.response) {
+          window.location.replace(error.response.data.data.sessionID[0]);
         }
       });
     },
