@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+/**
+ * Add payment session
+ */
 Route::post('/v1/register', 'PaymentController@register')->name('register');
+/**
+ * Add payment
+ */
 Route::post('/v1/payments/operation', 'PaymentController@create')->name('operation');
+/**
+ * Get payments
+ */
 Route::get('/v1/payments', 'PaymentController@getAll')->name('payments');

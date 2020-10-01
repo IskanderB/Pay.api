@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DocController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,18 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
+/**
+ * Render payment card form
+ */
 Route::get('/payments/card/form', 'CardFormController@index')->name('cardForm');
+
+/**
+ * Render payment response
+ */
 Route::get('/payments/card/response', 'PaymentResultController@index')->name('cardResponse');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/documentation', [DocController::class, 'index'])->name('documentation');

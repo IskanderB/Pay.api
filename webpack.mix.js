@@ -12,6 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/bundles/redoc.standalone.js', 'public/js/redoc.standalone.js')
     .sass('resources/sass/app.scss', 'public/css')
     .less('resources/less/app.less', 'public/css/less.css');
-    

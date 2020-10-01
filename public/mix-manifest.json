@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/less.css": "/css/less.css",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/redoc.standalone.js": "/js/redoc.standalone.js"
 }

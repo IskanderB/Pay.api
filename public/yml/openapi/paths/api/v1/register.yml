@@ -1,0 +1,49 @@
+paths:
+    apiV1Register:
+        post:
+            summary: "Create payment session"
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            properties:
+                                amount:
+                                    type: numeric
+                                    example: 1000.00
+                                    required: true
+                                target:
+                                    type: string
+                                    example: "Example target"
+                                    maxLength: 255
+                                    required: true
+            responses:
+                201:
+                    content:
+                       application/json:
+                           schema:
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            pay_link:
+                                                type: string
+                                                example: "http://pay.api.ru/payments/card/form?sessionID=UNtkTVoUpiJpvV0SIcZLaAawtzf60jI4UrBP86lChT1NWIPzDxsxRBHTvwZX1Tw3TaBjhwpS2Doei3ac"
+                                                description: "Link to payment form"
+                422:
+                    content:
+                       application/json:
+                           schema:
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            amount:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                    example: "The amount field is required."
+                                            target:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                    example: "The target field is required."

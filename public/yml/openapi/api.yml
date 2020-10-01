@@ -1,0 +1,17 @@
+openapi: 3.0.1
+
+info:
+    version: 1.0.0
+    title: 'API documentation for pay.api'
+servers:
+  - url: http://pay.api.ru/
+paths:
+    /api/v1/register:
+        post:
+            $ref: "./paths/api/v1/register.yml#/paths/apiV1Register/post"
+    /api/v1/payments/operation:
+        post:
+            $ref: "./paths/api/v1/payments/operation.yml#/paths/apiV1PaymentsOperation/post"
+    /api/v1/payments:
+        get:
+            $ref: "./paths/api/v1/payments.yml#/paths/apiV1Payments/get"

@@ -7,19 +7,43 @@ use App\Payment;
 use App\Session;
 use App\Rules\Luhn;
 
+/**
+ * Controller for getting and posting payments
+ *
+ * This controller validate data, call model functions,
+ * pass data to model, transform data from model
+ * for response, send response
+ *
+ * @author Alexandr Khurtin <axurtin.rep@gmail.com>
+ * @version 1.0
+ */
+
 class PaymentController extends Controller
 {
     use \App\Traits\PeculiarValidator;
-    
+
+    /**
+     * Default count rows in page is returned
+     * by route - "payments"
+     */
     const DEFAULT_COUNT_ROWS = 10;
-    
+
+    /**
+     *
+     * @var Payment
+     */
     private $payment;
+
+    /**
+     *
+     * @var Session
+     */
     private $session;
-        
+
     /**
      * This method validate request data, call model method 'create'
      * and send JSON response
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -33,10 +57,10 @@ class PaymentController extends Controller
         if ($validator) {
             return $validator;
         }
-        
+
         $url = $request->getHttpHost();
         $result = $this->session->create($request->all(), $url);
-        
+
         if ($result) {
             return response()->json([
                 'data' => [
@@ -47,23 +71,29 @@ class PaymentController extends Controller
         return response()->json([
                 'data' => '',
             ], 400);
-        
+
     }
-    
-    public function create(Request $request) {
+
+    /**
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function create(Request $request) : \Illuminate\Http\JsonResponse {
         $this->payment = new Payment();
         $rules = [
             'sessionID' => 'required|string|max:80|min:80|exists:sessions,sessionID',
             'cardNumber' => ['required', 'string', 'max:19', 'min:19', new Luhn],
             'cardName' => 'max:255',
-            'cardDate' => 'required|integer',
+            'cardDate' => 'required|string',
             'cardCvv' => 'required|string|max:4'
         ];
         $validator = $this->validator($request->all(), $rules);
         if ($validator) {
             return $validator;
         }
-        
+
         $result = $this->payment->create($request->all());
 
         if ($result) {
@@ -77,8 +107,14 @@ class PaymentController extends Controller
                 'url' => $url,
             ], 400);
     }
-    
-    public function getAll(Request $request) {
+
+    /**
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getAll(Request $request) : \Illuminate\Http\JsonResponse {
         $this->payment = new Payment();
         $rules = [
             'begin_interval' => 'required|string|max:19',
@@ -90,6 +126,7 @@ class PaymentController extends Controller
             return $validator;
         }
 
+        // Set correct data for passing to model
         $data = [
             'begin_interval' => $request->begin_interval,
             'end_interval' => $request->end_interval ?? date('Y-m-d h:i:s'),
@@ -97,9 +134,9 @@ class PaymentController extends Controller
         ];
 
         $result = $this->payment->getAll($data);
-        
+
         if ($result) {
-            if(count($result) > 10) {
+            if(count($result) == 10) {
                 $skip = $data['skip'] + self::DEFAULT_COUNT_ROWS;
                 $route = route('payments', [
                     'begin_interval' => $request->begin_interval,

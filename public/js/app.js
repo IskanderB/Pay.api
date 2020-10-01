@@ -2182,7 +2182,7 @@ __webpack_require__.r(__webpack_exports__);
           target: this.data.target,
           cardNumber: this.cardNumber,
           cardName: this.cardName,
-          cardDate: Number(String(this.cardMonth) + String(this.cardYear)),
+          cardDate: String(this.cardMonth) + String(this.cardYear),
           cardCvv: this.cardCvv
         }
       }).then(function (response) {

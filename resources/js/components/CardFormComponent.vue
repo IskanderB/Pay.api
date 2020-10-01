@@ -1,5 +1,5 @@
 <template>
-    
+
     <div class="card-form">
       <div class="card-list">
         <div class="card-item" v-bind:class="{ '-active' : isCardFlipped }">
@@ -9,7 +9,7 @@
               <img
               v-bind:src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + currentCardBackground + '.jpeg'" class="card-item__bg">
             </div>
-            
+
             <div class="card-item__wrapper">
               <div class="card-item__top">
                 <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" class="card-item__chip">
@@ -170,7 +170,7 @@
 <script>
 
     export default {
-    
+
     data() {
     return {
       currentCardBackground: Math.floor(Math.random()* 25 + 1), // just for fun :D
@@ -223,7 +223,7 @@
 
       re = new RegExp("^6011");
       if (number.match(re) != null) return "discover";
-      
+
       re = new RegExp('^9792')
       if (number.match(re) != null) return 'troy'
 
@@ -245,7 +245,7 @@
     }
   },
   methods: {
-    
+
     sentPayment () {
         let errorColor = 'red';
         let defaultColor = '#ced6e0';
@@ -282,7 +282,7 @@
                 target: this.data.target,
                 cardNumber: this.cardNumber,
                 cardName: this.cardName,
-                cardDate: Number(String(this.cardMonth) + String(this.cardYear)),
+                cardDate: String(this.cardMonth) + String(this.cardYear),
                 cardCvv: this.cardCvv
             }
         })
@@ -298,7 +298,7 @@
                 window.location.replace(error.response.data.data.sessionID[0]);
             }
         });
-        
+
     },
     flipCard (status) {
       this.isCardFlipped = status;

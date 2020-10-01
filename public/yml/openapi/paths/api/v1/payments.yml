@@ -1,0 +1,85 @@
+paths:
+    apiV1Payments:
+        get:
+            parameters:
+                - in: query
+                  name: begin_interval
+                  schema:
+                      type: string
+                      example: "2020-09-21 11:00:00"
+                      required: false
+                      maxLength: 19
+                - in: query
+                  name: end_interval
+                  schema:
+                      type: string
+                      example: "2020-09-21 11:00:00"
+                      required: false
+                      maxLength: 19
+                - in: query
+                  name: skip
+                  schema:
+                      type: integer
+                      example: 10
+                      required: false
+            summary: "Get all payments"
+            responses:
+              200:
+                  content:
+                     application/json:
+                         schema:
+                              properties:
+                                  data:
+                                      type: array
+                                      items:
+                                          type: object
+                                          properties:
+                                              id:
+                                                  type: integer
+                                                  example: 1
+                                              created_at:
+                                                  type: string
+                                                  example: "2020-09-11T12:20:13.000000Z"
+                                              amount:
+                                                  type: numeric
+                                                  example: 1000.00
+                                              target:
+                                                  type: string
+                                                  maxLength: 255
+                                                  example: "Example target"
+                                              cardNumber:
+                                                  type: string
+                                                  maxLength: 5
+                                                  minLenght: 5
+                                                  example: "*0000"
+              422:
+                  content:
+                     application/json:
+                         schema:
+                              properties:
+                                  data:
+                                      type: object
+                                      properties:
+                                          begin_interval:
+                                              type: array
+                                              items:
+                                                  type: string
+                                                  example: "The begin_interval field is required."
+                                          end_interval:
+                                              type: array
+                                              items:
+                                                  type: string
+                                                  example: "The end interval may not be greater than 19 characters."
+                                          skip:
+                                              type: array
+                                              items:
+                                                  type: string
+                                                  example:  "The skip must be an integer."
+              404:
+                  content:
+                     application/json:
+                         schema:
+                              properties:
+                                  data:
+                                      type: string
+                                      example: ""

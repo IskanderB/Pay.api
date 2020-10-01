@@ -1,0 +1,81 @@
+paths:
+    apiV1PaymentsOperation:
+        post:
+            summary: "Create payment operation"
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            properties:
+                                sessionID:
+                                    type: string
+                                    minLength: 80
+                                    maxLength: 80
+                                    example: "UNtkTVoUpiJpvV0SIcZLaAawtzf60jI4UrBP86lChT1NWIPzDxsxRBHTvwZX1Tw3TaBjhwpS2Doei3ac"
+                                    required: true
+                                cardNumber:
+                                    type: string
+                                    minLength: 19
+                                    maxLength: 19
+                                    example: "0000 0000 0000 0000"
+                                    required: true
+                                cardName:
+                                    type: string
+                                    maxLength: 255
+                                    example: "Example Name"
+                                    required: true
+                                cardDate:
+                                    type: string
+                                    example: "052023"
+                                    minLength: 6
+                                    maxLength: 6
+                                    required: true
+                                cardCvv:
+                                    type: string
+                                    minLength: 3
+                                    maxLength: 4
+                                    example: "000"
+                                    required: true
+            responses:
+                201:
+                    content:
+                       application/json:
+                           schema:
+                                properties:
+                                    url:
+                                        type: string
+                                        example: "http://pay.api.ru/payments/card/response?status=1"
+                                        description: "Link to response page"
+                422:
+                    content:
+                       application/json:
+                           schema:
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            sessionID:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                    example: "The sessionID field is required."
+                                            cardNumber:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                    example: "The cardNumber field is required."
+                                            cardName:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                    example: "The cardName field is required."
+                                            cardDate:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                    example: "The cardDate field is required."
+                                            cardCvv:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                    example: "The cardCvv field is required."

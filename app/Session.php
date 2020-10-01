@@ -5,6 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+/**
+ * Model for inserting, selecting and deleting sessions rows
+ * 
+ * @author Alexandr Khurtin <axurtin.rep@gmail.com>
+ * @version 1.0
+ */
+
 class Session extends Model
 {
     /**
@@ -12,13 +19,13 @@ class Session extends Model
      * @var string
      */
     private $sessionID;
+    
     /**
      * 
      * @param arry $data
      * @param string $host
      * @return string
-     */
-        
+     */      
     public function create(array $data, string $host) : string {
         $url = $this->buildURL($host);
         $data['sessionID'] = $this->sessionID;
@@ -33,6 +40,8 @@ class Session extends Model
     }
     
     /**
+     * Method build url to payment form page
+     * with current sessionID
      * 
      * @param string $host
      * @return string
@@ -44,18 +53,25 @@ class Session extends Model
         return 'http://' . $host . '/payments/card/form?sessionID=' . $this->sessionID;
     }
     
-    public function getOne($sessionID) {
+    /**
+     * 
+     * @param string $sessionID
+     * @return Session | null
+     */
+    public function getOne(string $sessionID) {
         $result = $this->select('amount', 'target')
                 ->where('sessionID', '=', $sessionID)
                 ->get()
                 ->first();
-        if ($result) {
-            $result->toArray();
-        }
         return $result;
     }
     
-    public function deleteOne($sessionID) {
+    /**
+     * 
+     * @param string $sessionID
+     * @return void
+     */
+    public function deleteOne(string $sessionID) : void {
         $this->where('sessionID', '=', $sessionID)->delete();
     }
 }
