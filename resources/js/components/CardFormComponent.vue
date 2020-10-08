@@ -273,9 +273,10 @@
         }
         else this.cardCvvColor = defaultColor;
 
+        let host = location.hostname;
         axios({
             method: 'post',
-            url: 'http://pay.api.ru/api/v1/payments/operation',
+            url: 'http://' + host + '/api/v1/payments/operation',
             params: {
                 sessionID: this.data.sessionID,
                 amount: this.data.amount,
