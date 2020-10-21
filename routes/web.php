@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocController;
+use App\Http\Controllers\IndexController;
 
+if (env('APP_ENV') == 'prod') {
+    URL::forceScheme('https');
+}
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +18,7 @@ use App\Http\Controllers\DocController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
 /**
  * Render payment card form
@@ -30,6 +32,6 @@ Route::get('/payments/card/response', 'PaymentResultController@index')->name('ca
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/documentation', [DocController::class, 'index'])->name('documentation');

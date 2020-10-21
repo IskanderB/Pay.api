@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-    web:
+    web_pay:
         build: ./web
         restart: always
         environment:
@@ -10,10 +10,10 @@ services:
         volumes:
             - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
         ports:
-            - 10080:80
+            - 10060:80
         working_dir: ${APP_PATH_CONTAINER}
 
-    db:
+    db_pay:
         build: ./db
         command: "--innodb_use_native_aio=0 --default-authentication-plugin=mysql_native_password"
         restart: always
@@ -23,15 +23,19 @@ services:
         volumes:
             - ${DB_PATH_HOST}:/var/lib/mysql
 
-    phpmyadmin:
+    phpmyadmin_pay:
         build: ./phpmyadmin
+        links:
+            - db_pay
         restart: always
         ports:
-            - 10081:80
+            - 10061:80
         environment:
+            - PMA_HOST=db_pay
+            - PMA_PORT=3306
             - PMA_ARBITRARY=1
 
-    composer:
+    composer_pay:
         image: composer
         volumes:
             - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}

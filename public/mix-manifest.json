@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/redoc.standalone.js": "/js/redoc.standalone.js"
+    "/css/app.css": "/css/app.css",
+    "/js/redoc.standalone.js": "/js/redoc.standalone.js",
+    "/js/script.js": "/js/script.js"
 }

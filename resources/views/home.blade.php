@@ -1,23 +1,33 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Home page</title>
+        <link rel="stylesheet" href="{{URL::asset('css/app.css')}}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="wrap">
+                    <div class="box">
+                        <div class="text">
+                            <h5 id="host_name"></h5>This is an api service for posting and getting <span>ads.</span>
+                            To use this service you should check
+                            <span>
+                                <a href="#" class="documentation_link">
+                                    documentation!
+                                </a>
+                            </span>
                         </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                        <div class="button_box">
+                            <a href="#" class="btn btn-primary documentation_link">Documentation</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+        <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
+        <script type="text/javascript" src="{{URL::asset('js/script.js')}}"></script>
+    </body>
+</html>
