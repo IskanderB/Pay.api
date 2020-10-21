@@ -2174,11 +2174,10 @@ __webpack_require__.r(__webpack_exports__);
       } else this.cardCvvColor = defaultColor;
 
       var host = location.hostname;
+      var prot = 'https';
 
       if (host == 'pay.api.ru') {
         var _prot = 'http';
-      } else {
-        var _prot2 = 'https';
       }
 
       axios({

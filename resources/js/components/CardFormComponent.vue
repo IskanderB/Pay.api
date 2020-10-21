@@ -274,12 +274,11 @@
         else this.cardCvvColor = defaultColor;
 
         let host = location.hostname;
+        let prot = 'https';
         if(host == 'pay.api.ru'){
             let prot = 'http';
         }
-        else{
-            let prot = 'https';
-        }
+        
         axios({
             method: 'post',
             url: prot + '://' + host + '/api/v1/payments/operation',
