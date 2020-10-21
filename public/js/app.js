@@ -2174,9 +2174,16 @@ __webpack_require__.r(__webpack_exports__);
       } else this.cardCvvColor = defaultColor;
 
       var host = location.hostname;
+
+      if (host == 'pay.api.ru') {
+        var _prot = 'http';
+      } else {
+        var _prot2 = 'https';
+      }
+
       axios({
         method: 'post',
-        url: 'http://' + host + '/api/v1/payments/operation',
+        url: prot + '://' + host + '/api/v1/payments/operation',
         params: {
           sessionID: this.data.sessionID,
           amount: this.data.amount,
